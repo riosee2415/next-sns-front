@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 3000"
+    "dev": "next -p 3000",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start -p 3000"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +18,7 @@
     "immer": "^9.0.5",
     "next": "^9.5.5",
     "next-redux-wrapper": "^6.0.2",
+    "pm2": "^5.1.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
