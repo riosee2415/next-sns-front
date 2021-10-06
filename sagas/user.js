@@ -23,7 +23,6 @@ function signUpAPI(data) {
       nickname: "TEST",
     },
   };
-  // return axios.post("http:localhost:4000/api/signup", data);
 }
 
 function* signUp(action) {

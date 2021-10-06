@@ -111,7 +111,7 @@ const FeedCreateForm = () => {
 
       {previewImage && (
         <PreivewImg
-          src={`http://localhost:4000/${previewImage}`}
+          src={`https://api.schoolhealing2.co.kr/${previewImage}`}
           alt="PREVIEW"
         />
       )}

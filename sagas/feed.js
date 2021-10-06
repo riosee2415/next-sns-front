@@ -8,6 +8,10 @@ import {
   FEED_CREATE_REQUEST,
   FEED_CREATE_SUCCESS,
   FEED_CREATE_FAILURE,
+  //
+  FEED_LIST_REQUEST,
+  FEED_LIST_SUCCESS,
+  FEED_LIST_FAILURE,
 } from "../reducers/feed";
 
 // ACTION AREA ///////////////////////////////////////////////////////////////
@@ -58,6 +62,30 @@ function* feedCreate(action) {
 
 /////////////////////////////////////////////////////////////////////////////
 
+// ACTION AREA ///////////////////////////////////////////////////////////////
+function feedListAPI() {
+  return axios.get("/api/feed/list");
+}
+
+function* feedList() {
+  try {
+    const result = yield call(feedListAPI);
+
+    yield put({
+      type: FEED_LIST_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: FEED_LIST_FAILURE,
+      data: result.data,
+    });
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
 // WATCH AREA
 function* watchImageUpload() {
   yield takeLatest(IMAGE_UPLOAD_REQUEST, imageUpload);
@@ -67,10 +95,15 @@ function* watchFeedCreate() {
   yield takeLatest(FEED_CREATE_REQUEST, feedCreate);
 }
 
+function* watchFeedList() {
+  yield takeLatest(FEED_LIST_REQUEST, feedList);
+}
+
 export default function* feedSaga() {
   yield all([
     fork(watchImageUpload),
     fork(watchFeedCreate),
+    fork(watchFeedList),
     // ,
     // ,
   ]);

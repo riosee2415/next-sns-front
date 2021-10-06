@@ -28,13 +28,13 @@ const FeedImage = styled(Image)`
   }
 `;
 
-const FeedBox = () => {
+const FeedBox = ({ feedData }) => {
   return (
     <FeedCard
       cover={
         <FeedImage
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          alt={feedData.title}
+          src={`https://api.schoolhealing2.co.kr/${feedData.imagePath}`}
         />
       }
       actions={[
@@ -47,8 +47,8 @@ const FeedBox = () => {
         avatar={
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
         }
-        title="Card title"
-        description="This is the description"
+        title={feedData.title}
+        description={feedData.content}
       />
     </FeedCard>
   );

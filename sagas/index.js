@@ -3,7 +3,7 @@ import userSaga from "./user";
 import feedSaga from "./feed";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://api.schoolhealing2.co.kr";
 axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {

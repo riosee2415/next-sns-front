@@ -3,6 +3,7 @@ import AppLayout from "../components/AppLayout";
 import FeedBox from "../components/FeedBox";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
+import { FEED_LIST_REQUEST } from "../reducers/feed";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
@@ -11,11 +12,26 @@ import FeedCreateForm from "../components/FeedCreateForm";
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  const { mainFeeds, st_feedCreateDone } = useSelector((state) => state.feed);
+
+  useEffect(() => {
+    dispatch({
+      type: FEED_LIST_REQUEST,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (st_feedCreateDone) {
+      dispatch({
+        type: FEED_LIST_REQUEST,
+      });
+    }
+  }, [st_feedCreateDone]);
 
   return (
     <AppLayout>
       {me && <FeedCreateForm />}
-      <FeedBox />
+      {mainFeeds && mainFeeds.map((data) => <FeedBox feedData={data} />)}
     </AppLayout>
   );
 };
